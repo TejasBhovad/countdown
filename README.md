@@ -1,6 +1,6 @@
 # CountDown Full Stack App
 
-A full stack web app that would allow users(mainly brands) to create counts(countdowns) to upcoming events to create hype as part of their marketing campaign.
+A full stack web app that would allow Brands(mainly brands) to create counts(countdowns) to upcoming events to create hype as part of their marketing campaign.
 
 ## 🌐 Running on Local server
 

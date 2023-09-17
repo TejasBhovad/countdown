@@ -25,6 +25,7 @@ const EventFrame = () => {
             width={EVN_SIZE}
             height={EVN_SIZE}
             className="object-cover rounded-t-md event-image"
+            alt="Event Image"
           />
         </div>
       </div>
@@ -38,6 +39,7 @@ const EventFrame = () => {
                   width={IMG_SIZE}
                   height={IMG_SIZE}
                   className="rounded-sm"
+                  alt="Brand Logo"
                 />
               </div>
               <div className="brand-name text-sm text-gray text-center">

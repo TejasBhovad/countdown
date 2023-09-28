@@ -1,5 +1,6 @@
 import React from "react";
 import Menu from "@/components/logos/Menu";
+import Clock from "@/components/logos/Clock";
 
 const Navbar = () => {
   return (
@@ -8,7 +9,9 @@ const Navbar = () => {
         <Menu />
       </div>
       <div className="title w-1/3 text-center font-semibold">DownCount</div>
-      <div className="clock w-1/3 text-right">clock</div>
+      <div className="clock w-1/3 text-right flex items-center justify-end">
+        <Clock className="w-5 h-5"/>
+      </div>
     </div>
   );
 };

@@ -2,7 +2,6 @@
 // import statements go here REMOVE UNNECESSARY IMPORTS
 import { React, useState } from "react";
 import EventFrame from "@/components/EventFrame.jsx";
-import { Button } from "@/components/ui/button";
 
 const page = () => {
   return (

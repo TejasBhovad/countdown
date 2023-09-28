@@ -20,3 +20,4 @@ A full stack web app that would allow Brands(mainly brands) to create counts(cou
 - Make sure to keep regular backups by copy pasting the project directory to you local machine
 
 - Update the notion space as and when components are ready
+- README UPDATE: Update the README.md file with the changes you have made to the project

@@ -1,13 +1,18 @@
-import React from 'react'
+import Search from "@/components/logos/Search.jsx";
 
 const Searchbar = () => {
   return (
-    <div class="search-container border-radius 2px display:flex">
-    <input type="text" id="search-input" placeholder="Search counts..."/>
-    <button id="search-button text-align:Right"><img src="discord.png" alt="search logo" /></button>
-</div>
+    <div class="text-md search-container border-radius 2px flex bg-background items-center gap-2 rounded-xl px-3">
+      <Search />
+      <input
+        type="text"
+        id="search-input"
+        placeholder="Search counts..."
+        className="bg-transparent w-36 border-transparent focus:border-transparent focus:ring-0 outline-none text-secondary"
+      />
+      <button id="search-button"></button>
+    </div>
+  );
+};
 
-  )
-}
-
-export default Searchbar
+export default Searchbar;

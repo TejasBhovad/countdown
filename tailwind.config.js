@@ -23,6 +23,7 @@ module.exports = {
         white: "#fff",
         gray: "#ABB4B8",
         background: "#E7F4FD",
+        util: "#CADDE8",
         primary: "#061826",
         secondary: "#2C4053",
         card: "#CDE0ED",

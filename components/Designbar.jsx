@@ -7,7 +7,7 @@ const Designbar = () => {
     <div className='title text-bold text-xl r bg-primary w-80 justify-center grid-cols-1 text-white p-5 '>Countdown Name</div>
     <div className='flex p-5'>
         <div className='font-black pr-4 '>EventDate  </div>
-       <div  > <input type='datetime-local'  className=' rounded-md bg-white' /></div>
+       <div  > <input type='date'  className=' rounded-md bg-white' /></div>
         </div>
         
         

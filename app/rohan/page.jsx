@@ -1,7 +1,7 @@
 "use client";
 // import statements go here REMOVE UNNECESSARY IMPORTS
 import { React, useState } from "react";
-import BasicInfo from "@/components/BasicInfo";
+import Textbar from "@/components/Textbar";
 
 
 
@@ -12,7 +12,7 @@ const page = () => {
       {/* Added element for testing purposes, after testing should be removed from here */}
      
      
-  <BasicInfo/>
+  <Textbar/>
      
     </div>
   );

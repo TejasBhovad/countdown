@@ -1,10 +1,12 @@
+// import { useState } from "react";
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import { connectToDB } from "@/utils/database";
 import Brand from "@/models/brand";
 import { randomBytes } from "crypto";
 export const dynamic = "force-dynamic";
-import { uploadBrandData } from "@/components/query/BrandHandler.jsx";
+// import { uploadBrandData } from "@/components/query/BrandHandler.jsx";
+
 const handler = NextAuth({
   providers: [
     GoogleProvider({
@@ -54,14 +56,15 @@ const handler = NextAuth({
             counter++;
           }
           // Create a new brand
-          const [brandData, setBrandData] = useState({
+          const brandData = {
             id: modifiedId,
             name: profile.name,
             email: profile.email,
             image: profile.image,
             countdowns: [],
-          });
-          uploadBrandData(brandData);
+          };
+          const newBrand = new Brand(brandData);
+          await newBrand.save();
         }
         // Return true to indicate successful sign-in
         return true;

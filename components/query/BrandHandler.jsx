@@ -1,4 +1,4 @@
-"use client";
+// "use client";
 import React from "react";
 
 // Upload brand data to the database
@@ -15,7 +15,6 @@ const uploadBrandData = async (dataToUpload) => {
     if (!response.ok) {
       throw new Error("Something went wrong");
     }
-    
   } catch (error) {
     console.error("Failed to upload brand data", error);
   }

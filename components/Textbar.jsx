@@ -10,7 +10,7 @@ import {
 
 const Textbar = () => {
   return (
-    <div className='p-16 rounded-lg'>
+    <div className='p-5 rounded-lg '>
     <div className='flex-col bg-util rounded-lg w-full pr-10 pb-20 justify-start '>
     <div className='title font-extrabold text-xl text-secondary w-80  justify-center grid-cols-1 p-5 '>Text Options</div>
   

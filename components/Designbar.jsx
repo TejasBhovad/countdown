@@ -3,8 +3,8 @@ import React from 'react'
 const Designbar = () => {
   return (
    
-    <div className='flex-col bg-util rounded-lg w-80'>
-    <div className='title text-bold text-xl r bg-primary w-80 justify-center grid-cols-1 text-white p-5 '>Countdown Name</div>
+    <div className='flex-col bg-util rounded-lg w-80 h-full'>
+    <div className='title font-extrabold text-xl r bg-primary w-80 justify-center grid-cols-1 text-white p-5 rounded-t-lg '>Countdown Name</div>
     <div className='flex p-5'>
         <div className='font-semibold pr-4 '>EventDate  </div>
        <div  > <input type='date'  className=' rounded-md bg-white' /></div>

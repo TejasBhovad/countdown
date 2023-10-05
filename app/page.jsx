@@ -46,9 +46,9 @@ const page = () => {
           <Sortby cName="smile" link="smile" logo={<Smile />} />
         </div>
       </div>
-      <div className="fixed bottom-0 left-0 z-50 bg-white shadow-md w-full">
+      {/* <div className="fixed bottom-0 left-0 z-50 bg-white shadow-md w-full">
         <Navbar />
-      </div>
+      </div> */}
     </div>
   );
 };

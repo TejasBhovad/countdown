@@ -24,6 +24,7 @@ module.exports = {
         gray: "#ABB4B8",
         background: "#E7F4FD",
         util: "#CADDE8",
+        hover: "#B6D0E1",
         primary: "#061826",
         secondary: "#2C4053",
         card: "#CDE0ED",

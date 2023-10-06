@@ -1,14 +1,15 @@
+"use client";
 import React from "react";
-import Navbar from "@/components/Navbar";
-import SignIn from "@/components/SignIn";
-import Header from "@/components/Header";
-
+import { useState } from "react";
+import BasicInfo from "@/components/BasicInfo";
+import ClickDiv from "@/components/ClickDiv";
 const page = () => {
+  const [countName, setCountName] = useState("count name");
   return (
-    <div>
-      <Navbar />
-      <SignIn />
-      <Header />
+    <div className="w-full h-full">
+      {/* <BasicInfo /> */}
+      <ClickDiv placeholder={countName} onChange={setCountName} />
+      {countName}
     </div>
   );
 };

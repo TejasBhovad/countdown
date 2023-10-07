@@ -20,7 +20,7 @@ const uploadBrandData = async (dataToUpload) => {
   }
 };
 
-// Function to get the user's Data by email
+// Function to get the user's Data by ID
 const getBrandData = async (targetId) => {
   try {
     console.log("getting user data");
@@ -32,6 +32,29 @@ const getBrandData = async (targetId) => {
       },
       body: JSON.stringify({
         id: targetId,
+      }),
+    });
+    if (!response.ok) {
+      throw new Error("Something went wrong");
+    }
+    const brandData = await response.json();
+    return brandData;
+  } catch (error) {
+    console.error("Failed to fetch user data", error);
+  }
+};
+
+const getBrandDataEmail = async (targetId) => {
+  try {
+    console.log("getting user data");
+
+    const response = await fetch(`/api/brands/email`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: targetId,
       }),
     });
     if (!response.ok) {
@@ -58,5 +81,5 @@ const Brand = () => {
     </div>
   );
 };
-export { uploadBrandData, getBrandData };
+export { uploadBrandData, getBrandData, getBrandDataEmail };
 export default Brand;

@@ -1,41 +1,165 @@
+"use client";
 import React from "react";
+import { useRouter } from "next/navigation";
+import { uploadCountData } from "@/components/query/CountHandler.jsx";
+import { getBrandDataEmail } from "@/components/query/BrandHandler.jsx";
+import ClickArea from "@/components/ClickArea";
+import ClickDiv from "@/components/ClickDiv";
+import CategoryList from "@/components/CategoryList";
+import DragAndDrop from "@/components/DragAndDrop";
+import Info from "@/components/logos/Info";
+import { useState, useEffect } from "react";
+import { Button } from "@/components/ui/button";
+import { useSession } from "next-auth/react";
 
 const BasicInfo = () => {
-  return (
-    <div className="flex-col bg-util w-full h-full bg-red-400 px-5">
-      <div className="title font-bold text-5xl p-3">Basic Info</div>
+  const { data: session } = useSession();
+  const [countName, setCountName] = useState("count name");
+  const [countID, setID] = useState("count-id");
+  const [category, setCategory] = useState("none");
+  const [image, setImage] = useState("");
+  const [file, setFile] = useState(null);
+  const [countDescription, setCountDescription] = useState("count description");
+  const [URL, setURL] = useState("default");
+  const [brandID, setBrandID] = useState("brand-id");
+  const [countData, setCountData] = useState({
+    name: "PlaceHolder",
+    id: "dummy",
+    desc: "description",
+    image:
+      "https://res.cloudinary.com/dgfwo4qvg/image/upload/v1696678572/temp_ic3aa1.jpg",
+    time: "00",
+    date: "0000-00-00",
+    brand_id: "brand",
+    categories: "none",
+    count: [{ name: "dummy", id: "dummy", count: 0 }],
+  });
+  const [isMounted, setIsMounted] = useState(false); // Track component mounting
 
-      <div className="flex p-2">
-        <div className="font-semibold pr-5 text-xl ">Count Name</div>
-        <div className=" ">
-          <input
-            placeholder="Count_name "
-            className="bg-secondary rounded-md text-white"
-          ></input>
-        </div>
+  useEffect(() => {
+    setIsMounted(true); // Component is mounted
+    return () => {
+      setIsMounted(false); // Component is unmounted
+    };
+  }, []);
+
+  useEffect(() => {
+    if (isMounted && session) {
+      const email = session.user.email;
+      console.log(email);
+      try {``
+        getBrandDataEmail(email).then((data) => {
+          // console.log(data);
+          setBrandID(JSON.stringify(data.id));
+          console.log(brandID);
+        });
+      } catch (error) {
+        console.log(email);
+      }
+    }
+  }, [session, isMounted]);
+
+  // useEffect to update countData
+  useEffect(() => {
+    setCountData({
+      name: countName,
+      id: countID,
+      categories: category,
+      desc: countDescription,
+      image: URL,
+      time: "00",
+      date: "0000-00-00",
+      brand_id: brandID,
+      count: [{ name: "dummy", id: "dummy", count: 0 }],
+    });
+  }, [countName, countID, category, countDescription, URL, brandID]);
+
+  const handleImageUpload = async () => {
+    try {
+      const data = new FormData();
+      data.append("file", image);
+      data.append("upload_preset", "event_image");
+      data.append("cloud_name", process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME);
+      // data.append("public_id", userId);
+      fetch(
+        `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload`,
+        {
+          method: "POST",
+          body: data,
+        }
+      )
+        .then((res) => res.json())
+        .then((data) => {
+          setURL(data.url);
+          setImage(data.url);
+          setCountData({
+            name: countName,
+            id: countID,
+            categories: category,
+            desc: countDescription,
+            image: data.url,
+            time: "00",
+            date: "0000-00-00",
+            brand_id: brandID,
+            count: [{ name: "dummy", id: "dummy", count: 0 }],
+          });
+        });
+      await uploadData();
+    } catch (error) {
+      console.error("Error uploading image:", error);
+    }
+  };
+  const router = useRouter();
+  const uploadData = async () => {
+    console.log("uploading data");
+    console.log(countData);
+    await uploadCountData(countData);
+    const link = `/${brandID}/${countID}`;
+    // create timeout to wait for data to be uploaded
+    setTimeout(() => {
+      router.push(link);
+    }, 2000);
+  };
+
+  return (
+    <div className=" flex-col w-full h-full px-5 gap-5 flex py-4">
+      <div className="title font-bold text-5xl py-3 w-18">Basic Info</div>
+
+      <div className="sm:flex px-2">
+        <div className="font-semibold text-xl w-32">Count Name</div>
+        <ClickDiv placeholder={countName} onChange={setCountName} />
       </div>
 
-      <div className="flex p-2 ">
-        <div className="font-semibold pr-14 text-xl ">Count ID</div>
-        <div className="pr-4">
-          <input
-            placeholder="Count_id"
-            className="bg-secondary rounded-md"
-          ></input>
-        </div>
-        <div className="text-secondary text-semibold bg-white rounded-lg w-48 text-center  h-7">
+      <div className="sm:flex px-2 gap-4">
+        <div className="font-semibold text-xl w-28">Count ID</div>
+        <ClickDiv placeholder={countID} onChange={setID} />
+        <div className="gap-2 justify-center items-center text-secondary text-semibold bg-util rounded-sm w-56 text-center flex h-7 p-2">
+          <Info />
           can't be changed later
         </div>
       </div>
 
-      <div className="flex p-2">
-        <div className="font-semibold pr-7 text-xl">Description</div>
-        <div className=" ">
-          <input
-            placeholder="count description should be sufficently long"
-            className="bg-secondary rounded-md  h-56 w-96 "
-          ></input>
-        </div>
+      <div className="sm:flex px-2">
+        <div className="font-semibold text-xl w-32">Description</div>
+        <ClickArea
+          placeholder={countDescription}
+          onChange={setCountDescription}
+        />
+      </div>
+
+      <div className="sm:flex px-2">
+        <div className="font-semibold text-xl w-32">Category</div>
+        <CategoryList setCategory={setCategory} category={category} />
+      </div>
+
+      <div className="flex px-2 flex-col gap-4">
+        <div className="font-semibold text-xl">Upload Event Image</div>
+        <DragAndDrop setFiles={setFile} setImage={setImage} />
+      </div>
+      <div className="w-full">
+        <Button onClick={() => handleImageUpload()} className="w-32 ml-2">
+          Next
+        </Button>
       </div>
     </div>
   );

@@ -2,7 +2,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import Pen from "@/components/logos/Pen";
 
-const ClickableDiv = ({ placeholder, onChange }) => {
+const ClickArea = ({ placeholder, onChange }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [text, setText] = useState("");
   const [error, setError] = useState("");
@@ -21,7 +21,7 @@ const ClickableDiv = ({ placeholder, onChange }) => {
   const handleBlur = () => {
     setIsEditing(false);
     if (text.trim() === "") {
-      setError("Name can't be empty");
+      setError("Description can't be empty");
     } else {
       setError("");
     }
@@ -30,7 +30,7 @@ const ClickableDiv = ({ placeholder, onChange }) => {
   const handleInputChange = (event) => {
     setText(event.target.value);
     if (event.target.value.trim() === "") {
-      setError("Name can't be empty");
+      setError("Description can't be empty");
     } else {
       setError("");
     }
@@ -38,16 +38,15 @@ const ClickableDiv = ({ placeholder, onChange }) => {
   };
 
   return (
-    <div className="relative h-8 flex gap-2">
+    <div className={`relative h-24 flex gap-2`}>
       <div
         onClick={handleClick}
-        className="w-48 h-full bg-secondary text-white flex items-center rounded-sm"
+        className={`w-48 h-full bg-secondary text-white flex rounded-sm items-start`}
       >
         {isEditing ? (
-          <div className="relative w-full">
-            <input
-              type="text"
-              className={`w-full bg-transparent text-white px-2 outline-none ${
+          <div className="relative w-full h-full">
+            <textarea
+              className={`w-full h-full bg-transparent text-white px-2 outline-none ${
                 error ? "border-red-500" : ""
               }`}
               placeholder={placeholder}
@@ -67,7 +66,7 @@ const ClickableDiv = ({ placeholder, onChange }) => {
         )}
       </div>
       {error && (
-        <div className="h-full flex top-0 right-0 text-red-500 text-xs justify-center items-center">
+        <div className="h-full flex top-0 right-0 text-red-500 text-xs justify-center items-start">
           {error}
         </div>
       )}
@@ -75,4 +74,4 @@ const ClickableDiv = ({ placeholder, onChange }) => {
   );
 };
 
-export default ClickableDiv;
+export default ClickArea;

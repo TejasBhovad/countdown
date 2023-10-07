@@ -33,12 +33,12 @@ try {
       },
       time: {
         type: String,
-        required: true,
+        required: false,
         trim: true,
       },
       date: {
         type: String,
-        required: true,
+        required: false,
         trim: true,
       },
       image: {
@@ -48,14 +48,14 @@ try {
       },
       // array of categories
       categories: {
-        type: Array,
+        type: String,
         required: true,
         trim: true,
       },
       // save JSON object of the count
       count: {
         type: Object,
-        required: true,
+        required: false,
         trim: true,
       },
     })

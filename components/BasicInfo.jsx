@@ -3,6 +3,7 @@ import React from "react";
 import { useRouter } from "next/navigation";
 import { uploadCountData } from "@/components/query/CountHandler.jsx";
 import { getBrandDataEmail } from "@/components/query/BrandHandler.jsx";
+import { uploadBrandData } from "@/components/query/BrandHandler.jsx";
 import ClickArea from "@/components/ClickArea";
 import ClickDiv from "@/components/ClickDiv";
 import CategoryList from "@/components/CategoryList";
@@ -47,7 +48,7 @@ const BasicInfo = () => {
     if (isMounted && session) {
       const email = session.user.email;
       console.log(email);
-      try {``
+      try {
         getBrandDataEmail(email).then((data) => {
           // console.log(data);
           setBrandID(JSON.stringify(data.id));
@@ -114,11 +115,29 @@ const BasicInfo = () => {
     console.log("uploading data");
     console.log(countData);
     await uploadCountData(countData);
-    const link = `/${brandID}/${countID}`;
+    await updateBrandCountdowns();
+    const link = `/${brandID.replace(/"/g, "")}/${countID}`;
     // create timeout to wait for data to be uploaded
     setTimeout(() => {
       router.push(link);
     }, 2000);
+  };
+
+  // function to update brand's countdowns array with new countdown_id
+  const updateBrandCountdowns = async () => {
+    const brandData = await getBrandDataEmail(session.user.email);
+    const brandCountdowns = brandData.countdowns;
+    brandCountdowns.push(countID);
+    console.log(brandCountdowns);
+
+    // update brand's countdowns array
+    await uploadBrandData({
+      id: brandData.id,
+      name: brandData.name,
+      email: brandData.email,
+      countdowns: brandCountdowns,
+      image: brandData.image,
+    });
   };
 
   return (

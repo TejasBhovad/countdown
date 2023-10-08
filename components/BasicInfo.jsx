@@ -35,6 +35,7 @@ const BasicInfo = () => {
     categories: "none",
     count: [{ name: "dummy", id: "dummy", count: 0 }],
   });
+  // 
   const [isMounted, setIsMounted] = useState(false); // Track component mounting
 
   useEffect(() => {

@@ -24,6 +24,7 @@ const page = () => {
               brandImage="/images/discord.png"
               brandId="brand1"
               countId="count1"
+              edit={false}
             />
             <EventFrame
               // add tmp info
@@ -35,6 +36,7 @@ const page = () => {
               brandImage="/images/discord.png"
               brandId="brand2"
               countId="count2"
+              edit={false}
             />
           </div>
         </div>

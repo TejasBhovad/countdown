@@ -3,6 +3,15 @@ import React from "react";
 import { getBrandDataEmail } from "@/components/query/BrandHandler";
 import { useSession } from "next-auth/react";
 import { useState, useEffect } from "react";
+import Countdown from "@/components/Countdown";
+import EmailList from "@/components/EmailList";
+import Heading from "@/components/Heading";
+import BrandCard from "@/components/BrandCard";
+import ColorPickerPane from "@/components/ColorPickerPane";
+import HeadingEdit from "@/components/HeadingEdit";
+import { Button } from "@/components/ui/button";
+import { set } from "mongoose";
+
 const page = ({ params }) => {
   const [isMounted, setIsMounted] = useState(false); // Track component mounting
   const [brandID, setBrandID] = useState("brand-id");
@@ -28,27 +37,129 @@ const page = ({ params }) => {
       }
     }
   }, [session, isMounted]);
+
+  // State variables for colors
+  const [primaryColor, setPrimaryColor] = useState("#061826");
+  const [secondaryColor, setSecondaryColor] = useState("#2C4053");
+  const [textColor, setTextColor] = useState("#ffffff");
+  const [startTime, setStartTime] = useState("2023-10-31T00:00:00Z");
+  const [timeRemaining, setTimeRemaining] = useState(calculateTimeRemaining());
+  const [backgroundColor, setBackgroundColor] = useState("#E7F4FD");
+  const [inputColor, setInputColor] = useState("#0b090a");
+  const [brandIDCheck, setBrandIDCheck] = useState(params.brand_id);
+  const [countID, setCountID] = useState(params.count_id);
+  const [headingColor, setHeadingColor] = useState("061826");
+  const [borderColor, setBorderColor] = useState("#061826");
+  const [buttonColor, setButtonColor] = useState("#061826");
+  const [heading, setHeading] = useState("");
+  // Function to calculate time remaining
+  function calculateTimeRemaining() {
+    const now = new Date();
+    const eventDate = new Date(startTime);
+
+    const timeDifference = eventDate - now;
+
+    if (timeDifference <= 0) {
+      // Event has already started or ended
+      return {
+        days: 0,
+        hours: 0,
+        minutes: 0,
+        seconds: 0,
+      };
+    }
+
+    const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+    const hours = Math.floor(
+      (timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+    );
+    const minutes = Math.floor(
+      (timeDifference % (1000 * 60 * 60)) / (1000 * 60)
+    );
+    const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+
+    return {
+      days,
+      hours,
+      minutes,
+      seconds,
+    };
+  }
+
+  // Update time remaining every second
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setTimeRemaining(calculateTimeRemaining());
+    }, 1000);
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, []);
+
+  // create a function to get the brand data TODO
   return (
-    <div>
+    <div className="w-full h-full">
       {brandID.replace(/"/g, "") == params.brand_id ? (
-        <div>
-          <h1>Brand ID: {params.brand_id}</h1>
-          <h1>Count ID: {params.count_id}</h1>
+        <div
+          className="w-full h-full flex flex-col justify-center items-center gap-12"
+          style={{ backgroundColor: backgroundColor }}
+        >
+          <BrandCard
+            brandID={brandIDCheck}
+            primaryColor={primaryColor}
+            textColor={textColor}
+          />
+          {/* {params.brand_id}:{params.count_id} */}
+          {/* <Heading heading="hello world" textColor={headingColor} /> */}
+          <HeadingEdit
+            placeholder={"Heading"}
+            onChange={setHeading}
+            textColor={headingColor}
+          />
+          <Countdown
+            primaryColor={primaryColor}
+            secondaryColor={secondaryColor}
+            textColor={textColor}
+            timeRemaining={timeRemaining}
+          />
+          <EmailList
+            borderColor={borderColor}
+            buttonColor={buttonColor}
+            textColor={textColor}
+            inputColor={inputColor}
+            brandID={brandIDCheck}
+          />
+
+          <ColorPickerPane
+            primaryColor={primaryColor}
+            secondaryColor={secondaryColor}
+            textColor={textColor}
+            backgroundColor={backgroundColor}
+            inputColor={inputColor}
+            headingColor={headingColor}
+            borderColor={borderColor}
+            buttonColor={buttonColor}
+            setPrimaryColor={setPrimaryColor}
+            setSecondaryColor={setSecondaryColor}
+            setTextColor={setTextColor}
+            setBackgroundColor={setBackgroundColor}
+            setInputColor={setInputColor}
+            setHeadingColor={setHeadingColor}
+            setBorderColor={setBorderColor}
+            setButtonColor={setButtonColor}
+          />
+          <Button className="px-8 py-2">Save</Button>
         </div>
       ) : (
         <div>
           {/* access denied */}
-            <h1>Access Blocked</h1>
-            <p>this isn't a count you created</p>
+          <h1>Access Blocked</h1>
+          <p>this isn't a count you created</p>
         </div>
       )}
-      {brandID.replace(/"/g, "") + " " + params.brand_id}
-      {/* Edit page
-      <br />
-      {params.brand_id}:{params.count_id} */}
     </div>
   );
-  // URL: http://localhost:3000/brand_name/count_id/edit
 };
 
 export default page;

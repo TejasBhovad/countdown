@@ -1,40 +1,100 @@
-import React from 'react'
-
-const Countdown = () => {
+const Countdown = ({
+  primaryColor,
+  secondaryColor,
+  textColor,
+  timeRemaining,
+}) => {
   return (
-  <div className="flex" >
-    <div className="w-20 h-30 rounded-md rounded-r-none bg-primary text-white p-1.5 ">
-       <div className='w-15 h-15 rounded-md bg-secondary text-white box-border '>
-        <div className='h-2/3 flex items-center justify-center text-3xl'>08</div>
+    <div
+      className="flex w-6/12 bg-primary rounded-md count sm:px-2 px-1"
+      style={{ backgroundColor: primaryColor }}
+    >
+      {/* Countdown Tiles */}
+      <div className="contain-tile w-1/4 h-full flex flex-col justify-center items-center pt-3 pb-1">
+        <div
+          className="bg-secondary aspect-square w-11/12 rounded-md flex justify-center items-center"
+          style={{ backgroundColor: secondaryColor }}
+        >
+          <span
+            className="transition count-text text-7xl font-bold text-white flex justify-center items-center"
+            style={{ color: textColor }}
+            suppressHydrationWarning={true}
+          >
+            {timeRemaining.days}
+          </span>
         </div>
-       <div className="text-center font-semibold h-1/3 ">Days</div>
+        <span
+          className="transition count-other text-2xl font-semibold text-white flex justify-center items-center"
+          style={{ color: textColor }}
+        >
+          Days
+        </span>
       </div>
 
-      <div className="w-20 h-30 bg-primary text-white p-1.5 ">
-       <div className='w-15 h-15 rounded-md bg-secondary text-white box-border '>
-        <div className='h-2/3 flex items-center justify-center text-3xl'>12</div>
+      <div className="contain-tile w-1/4 h-full flex flex-col justify-center items-center pt-3 pb-1">
+        <div
+          className="bg-secondary aspect-square w-11/12 rounded-md flex justify-center items-center"
+          style={{ backgroundColor: secondaryColor }}
+        >
+          <span
+            className="transition count-text text-7xl font-bold text-white flex justify-center items-center"
+            style={{ color: textColor }}
+            suppressHydrationWarning={true}
+          >
+            {timeRemaining.hours}
+          </span>
         </div>
-       <div className="text-center font-semibold h-1/3 ">hours</div>
-       </div>
+        <span
+          className="transition count-other text-2xl font-semibold text-white flex justify-center items-center"
+          style={{ color: textColor }}
+        >
+          Hours
+        </span>
+      </div>
 
-       <div className="w-20 h-30  bg-primary text-white p-1.5 ">
-       <div className='w-15 h-15 rounded-md bg-secondary text-white box-border '>
-        <div className='h-2/3 flex items-center justify-center text-3xl'>36</div>
+      <div className="contain-tile w-1/4 h-full flex flex-col justify-center items-center pt-3 pb-1">
+        <div
+          className="bg-secondary aspect-square w-11/12 rounded-md flex justify-center items-center"
+          style={{ backgroundColor: secondaryColor }}
+        >
+          <span
+            className="transition count-text text-7xl font-bold text-white flex justify-center items-center"
+            style={{ color: textColor }}
+            suppressHydrationWarning={true}
+          >
+            {timeRemaining.minutes}
+          </span>
         </div>
-       <div className="text-center font-semibold h-1/3 ">min</div>
-       </div>
+        <span
+          className="transition count-other text-2xl font-semibold text-white flex justify-center items-center"
+          style={{ color: textColor }}
+        >
+          Minutes
+        </span>
+      </div>
 
-       <div className="w-20 h-30 rounded-md rounded-l-none bg-primary text-white p-1.5 ">
-       <div className='w-15 h-15 rounded-md bg-secondary text-white box-border '>
-        <div className='h-2/3 flex items-center justify-center text-3xl'>48</div>
+      <div className="contain-tile w-1/4 h-full flex flex-col justify-center items-center pt-3 pb-1">
+        <div
+          className="bg-secondary aspect-square w-11/12 rounded-md flex justify-center items-center"
+          style={{ backgroundColor: secondaryColor }}
+        >
+          <span
+            className="transition count-text text-7xl font-bold text-white flex justify-center items-center"
+            style={{ color: textColor }}
+            suppressHydrationWarning={true}
+          >
+            {timeRemaining.seconds}
+          </span>
         </div>
-       <div className="text-center font-semibold h-1/3 ">sec</div>
-       </div>
+        <span
+          className="transition count-other text-2xl font-semibold text-white flex justify-center items-center"
+          style={{ color: textColor }}
+        >
+          Seconds
+        </span>
+      </div>
+    </div>
+  );
+};
 
-
-  </div>
-    
-  )
-}
-
-export default Countdown
+export default Countdown;

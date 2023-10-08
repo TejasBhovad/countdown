@@ -11,7 +11,7 @@ const page = () => {
       <div className="sidebar bg-util w-24 h-full flex flex-col justify-between">
         <Sidebar sidebar={sidebar} setSidebar={setSidebar} />
       </div>
-      <div className="w-full h-full pl-24 flex justify-center items-center">
+      <div className="w-full h-full pl-8 flex justify-center items-center">
         {sidebar === "counts" ? <Counts /> : <Settings />}
       </div>
     </div>

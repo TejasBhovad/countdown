@@ -11,8 +11,14 @@ const EventFrame = ({
   brandImage,
   brandId,
   countId,
+  edit,
 }) => {
-  const LINK = brandId + "/" + countId;
+  let LINK;
+  if (edit) {
+    LINK = brandId + "/" + countId + "/edit";
+  } else {
+    LINK = brandId + "/" + countId;
+  }
   // size is set to constant to avoid repetition and easy modification
   const IMG_SIZE = 20;
   const EVN_SIZE = 300;

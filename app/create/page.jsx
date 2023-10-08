@@ -4,7 +4,7 @@ const page = () => {
   return (
     <div className="w-full h-full flex-col">
       <Navbar />
-      <div className="w-full h-full pt-12 bg-red-100">
+      <div className="w-full h-full pt-12 ">
         <BasicInfo />
       </div>
     </div>

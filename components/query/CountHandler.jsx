@@ -44,8 +44,33 @@ const getCountData = async (targetId) => {
   }
 };
 
+// function get event data by id and brand id
+const getEventData = async (targetId, brandId) => {
+  try {
+    console.log("getting event data");
+
+    const response = await fetch(`/api/counts/event`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        id: targetId,
+        brand_id: brandId,
+      }),
+    });
+    if (!response.ok) {
+      throw new Error("Something went wrong");
+    }
+    const eventData = await response.json();
+    return eventData;
+  } catch (error) {
+    console.error("Failed to fetch event data", error);
+  }
+};
+
 const Count = () => {
   return <div></div>;
 };
-export { uploadCountData, getCountData };
+export { uploadCountData, getCountData, getEventData };
 export default Count;

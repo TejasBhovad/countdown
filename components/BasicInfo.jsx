@@ -12,6 +12,7 @@ import Info from "@/components/logos/Info";
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { useSession } from "next-auth/react";
+import DatePicker from "@/components/DatePicker.jsx";
 
 const BasicInfo = () => {
   const { data: session } = useSession();
@@ -20,8 +21,12 @@ const BasicInfo = () => {
   const [category, setCategory] = useState("none");
   const [image, setImage] = useState("");
   const [file, setFile] = useState(null);
+  const [date, setDate] = useState(null);
+  const [time, setTime] = useState("12:00");
   const [countDescription, setCountDescription] = useState("count description");
-  const [URL, setURL] = useState("default");
+  const [URL, setURL] = useState(
+    "https://res.cloudinary.com/dgfwo4qvg/image/upload/v1696678572/temp_ic3aa1.jpg"
+  );
   const [brandID, setBrandID] = useState("brand-id");
   const [countData, setCountData] = useState({
     name: "PlaceHolder",
@@ -29,13 +34,13 @@ const BasicInfo = () => {
     desc: "description",
     image:
       "https://res.cloudinary.com/dgfwo4qvg/image/upload/v1696678572/temp_ic3aa1.jpg",
-    time: "00",
-    date: "0000-00-00",
+    time: "12:00",
+    date: "2021-09-01",
     brand_id: "brand",
     categories: "none",
     count: [{ name: "dummy", id: "dummy", count: 0 }],
   });
-  // 
+  //
   const [isMounted, setIsMounted] = useState(false); // Track component mounting
 
   useEffect(() => {
@@ -69,12 +74,21 @@ const BasicInfo = () => {
       categories: category,
       desc: countDescription,
       image: URL,
-      time: "00",
-      date: "0000-00-00",
-      brand_id: brandID,
+      time: time,
+      date: date,
+      brand_id: brandID.replace(/"/g, ""),
       count: [{ name: "dummy", id: "dummy", count: 0 }],
     });
-  }, [countName, countID, category, countDescription, URL, brandID]);
+  }, [
+    countName,
+    countID,
+    category,
+    countDescription,
+    URL,
+    brandID,
+    date,
+    time,
+  ]);
 
   const handleImageUpload = async () => {
     try {
@@ -100,8 +114,8 @@ const BasicInfo = () => {
             categories: category,
             desc: countDescription,
             image: data.url,
-            time: "00",
-            date: "0000-00-00",
+            time: time,
+            date: date,
             brand_id: brandID,
             count: [{ name: "dummy", id: "dummy", count: 0 }],
           });
@@ -117,7 +131,7 @@ const BasicInfo = () => {
     console.log(countData);
     await uploadCountData(countData);
     await updateBrandCountdowns();
-    const link = `/${brandID.replace(/"/g, "")}/${countID}`;
+    const link = `/${brandID.replace(/"/g, "")}/${countID}/edit`;
     // create timeout to wait for data to be uploaded
     setTimeout(() => {
       router.push(link);
@@ -138,6 +152,7 @@ const BasicInfo = () => {
       email: brandData.email,
       countdowns: brandCountdowns,
       image: brandData.image,
+      date: date,
     });
   };
 
@@ -176,10 +191,28 @@ const BasicInfo = () => {
         <div className="font-semibold text-xl">Upload Event Image</div>
         <DragAndDrop setFiles={setFile} setImage={setImage} />
       </div>
+      <div className="flex px-2 gap-4 items-center">
+        <div className="font-semibold text-xl">Event Date</div>
+        <DatePicker setDate={setDate} date={date} />
+      </div>
+      <div className="flex px-2 gap-4 items-center">
+        <div className="font-semibold text-xl">Event Time</div>
+        <input
+          type="time"
+          id="appt"
+          name="appt"
+          min="00:00"
+          max="23:59"
+          required
+          onChange={(e) => setTime(e.target.value)}
+          className="bg-primary text-white rounded-md px-2 py-1"
+        />
+      </div>
       <div className="w-full">
         <Button onClick={() => handleImageUpload()} className="w-32 ml-2">
           Next
         </Button>
+        {JSON.stringify(countData)}
       </div>
     </div>
   );

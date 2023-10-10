@@ -11,6 +11,7 @@ import ColorPickerPane from "@/components/ColorPickerPane";
 import HeadingEdit from "@/components/HeadingEdit";
 import { Button } from "@/components/ui/button";
 import { set } from "mongoose";
+import { getEventData } from "@/components/query/CountHandler.jsx";
 
 const page = ({ params }) => {
   const [isMounted, setIsMounted] = useState(false); // Track component mounting
@@ -52,6 +53,29 @@ const page = ({ params }) => {
   const [borderColor, setBorderColor] = useState("#061826");
   const [buttonColor, setButtonColor] = useState("#061826");
   const [heading, setHeading] = useState("");
+  const [countData, setCountData] = useState({
+    name: "PlaceHolder",
+    id: "dummy",
+    desc: "description",
+    image:
+      "https://res.cloudinary.com/dgfwo4qvg/image/upload/v1696678572/temp_ic3aa1.jpg",
+    time: "12:00",
+    date: "2021-09-01",
+    brand_id: "brand",
+    categories: "none",
+    count: [{ name: "dummy", id: "dummy", count: 0 }],
+  });
+
+  useEffect(() => {
+    try {
+      getEventData(params.count_id, params.brand_id).then((data) => {
+        console.log(data);
+        setCountData(data);
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }, [countData]);
   // Function to calculate time remaining
   function calculateTimeRemaining() {
     const now = new Date();
@@ -97,7 +121,8 @@ const page = ({ params }) => {
     };
   }, []);
 
-  // create a function to get the brand data TODO
+  // upload count data
+
   return (
     <div className="w-full h-full">
       {brandID.replace(/"/g, "") == params.brand_id ? (

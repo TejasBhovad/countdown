@@ -17,7 +17,7 @@ const DragAndDrop = ({ setImage, setFiles }) => {
   };
 
   const handleFile = (file) => {
-    if (file && file.type.startsWith("image/") && file.size <= 1024 * 1024) {
+    if (file && file.type.startsWith("image/") && file.size <= 10240 * 10240) {
       const reader = new FileReader();
       reader.onload = (e) => {
         setThumbnail(e.target.result);

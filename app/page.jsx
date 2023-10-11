@@ -13,32 +13,7 @@ const page = () => {
       <div className="py-3 flex w-full h-18 bg-transparent flex justify-between px-3">
         <div className="gap-2 bg-util flex w-full h-full justify-between py-2 px-4 rounded-md flex-col">
           <h1 className="font-bold text-2xl text-primary">Counts for you...</h1>
-          <div className="flex gap-5">
-            <EventFrame
-              // add tmp info
-              eventDate="12/12/2021"
-              eventTime="12:00 PM"
-              eventTitle="Event Title"
-              eventImage="/images/tmp.jpg"
-              brandName="Brand Name"
-              brandImage="/images/discord.png"
-              brandId="brand1"
-              countId="count1"
-              edit={false}
-            />
-            <EventFrame
-              // add tmp info
-              eventDate="12/12/2021"
-              eventTime="12:00 PM"
-              eventTitle="Event Title"
-              eventImage="/images/tmp.jpg"
-              brandName="Brand Name"
-              brandImage="/images/discord.png"
-              brandId="brand2"
-              countId="count2"
-              edit={false}
-            />
-          </div>
+          <div className="flex gap-5"></div>
         </div>
       </div>
       <div className="py-3 flex w-full h-18 bg-transparent flex justify-between px-3">

@@ -60,7 +60,7 @@ const handler = NextAuth({
             id: modifiedId,
             name: profile.name,
             email: profile.email,
-            image: this.session.user.image,
+            image: profile.picture,
             countdowns: [],
           };
           const newBrand = new Brand(brandData);

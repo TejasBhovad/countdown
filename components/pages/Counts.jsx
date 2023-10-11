@@ -32,18 +32,12 @@ const Counts = () => {
     }
   }, [session, isMounted]);
   return (
-    <div className="flex w-full h-full py-4">
+    <div className="flex w-full h-full py-4 gap-4">
       {/* map through the counts array and surround them my link */}
       {counts.map((count) => {
         return (
           <div key={count}>
             <EventFrame
-              eventDate="12/12/2021"
-              eventTime="12:00 PM"
-              eventTitle={count}
-              eventImage="/images/tmp.jpg"
-              brandName="Brand Name"
-              brandImage="/images/discord.png"
               brandId={brandID.replace(/"/g, "")}
               countId={count}
               edit={true}

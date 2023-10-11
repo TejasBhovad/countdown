@@ -1,3 +1,5 @@
+"use client";
+import { useState, useEffect } from "react";
 import Header from "@/components/Header";
 import EventFrame from "@/components/EventFrame";
 import Sortby from "@/components/Sortby";
@@ -5,8 +7,30 @@ import Code from "@/components/logos/Code";
 import Science from "@/components/logos/Science";
 import Smile from "@/components/logos/Smile";
 import Navbar from "@/components/Navbar";
+import { getHomeData } from "@/components/query/HomeHandler";
 
 const page = () => {
+  const [homeData, setHomeData] = useState([]);
+
+  const [isMounted, setIsMounted] = useState(false); // Track component mounting
+
+  useEffect(() => {
+    setIsMounted(true); // Component is mounted
+    return () => {
+      setIsMounted(false); // Component is unmounted
+    };
+  }, []);
+  const fetchHomeData = async () => {
+    const data = await getHomeData();
+    setHomeData(data);
+    console.log(data);
+  };
+  useEffect(() => {
+    if (isMounted) {
+      fetchHomeData();
+    }
+  }, [isMounted]);
+
   return (
     <div className="bg-background w-full h-full flex-col">
       <Header />
@@ -26,6 +50,17 @@ const page = () => {
       {/* <div className="fixed bottom-0 left-0 z-50 bg-white shadow-md w-full">
         <Navbar />
       </div> */}
+      <div className="py-3 flex w-full h-18 bg-transparent flex justify-between px-3">
+        <div className="gap-5 bg-util flex w-full h-full py-2 px-4 rounded-md">
+          {homeData.map((item) => (
+            <EventFrame
+              brandId={item.brand_id}
+              countId={item.id}
+              edit={false}
+            />
+          ))}
+        </div>
+      </div>
     </div>
   );
 };

@@ -98,7 +98,7 @@ const ColorPickerPane = ({
       {/* Button to open/close the color pane */}
       <button
         onClick={toggleColorPane}
-        className="p-2 flex justify-center items-center absolute inset-0 flex justify-center z-50 border-2 border-black rounded-full w-12 h-12 bg-white rounded-full shadow-lg mx-2 my-2"
+        className="p-2 top-12 flex justify-center items-center absolute inset-0 flex justify-center z-50 border-2 border-black rounded-full w-12 h-12 bg-white rounded-full shadow-lg mx-2 my-2"
       >
         {isOpen ? <Cross /> : <Color />}
       </button>
@@ -108,7 +108,7 @@ const ColorPickerPane = ({
         <div className={`fixed inset-0 flex items-center justify-center z-50`}>
           <div
             ref={colorPickerRef}
-            className="fixed left-0 top-72 transform -translate-x-1 -translate-y-1/2 bg-white p-6 rounded-lg shadow-xl"
+            className="fixed left-0 top-96 transform -translate-x-1 -translate-y-1/2 bg-white p-6 rounded-lg shadow-xl"
           >
             {/* Primary Color Picker */}
             <div className="mb-4 flex gap-2 items-center">

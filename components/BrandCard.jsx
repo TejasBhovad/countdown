@@ -19,7 +19,7 @@ const BrandCard = ({ brandID, primaryColor, textColor }) => {
     }
   }, [brandID]);
   return (
-    <div className="absolute top-0 right-0">
+    <div className="absolute top-12 right-0">
       <div className="w-72 h-12  flex justify-end items-center gap-3 px-4">
         <div
           className="bg-red-400 flex justify-center items-center gap-3 px-4 py-1 rounded-md"

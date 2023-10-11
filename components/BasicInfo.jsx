@@ -32,8 +32,7 @@ const BasicInfo = () => {
     name: "PlaceHolder",
     id: "dummy",
     desc: "description",
-    image:
-      "https://res.cloudinary.com/dgfwo4qvg/image/upload/v1696678572/temp_ic3aa1.jpg",
+    image: URL,
     time: "12:00",
     date: "2021-09-01",
     brand_id: "brand",
@@ -73,9 +72,9 @@ const BasicInfo = () => {
       id: countID,
       categories: category,
       desc: countDescription,
-      image: URL,
       time: time,
       date: date,
+      image: URL,
       brand_id: brandID.replace(/"/g, ""),
       count: [{ name: "dummy", id: "dummy", count: 0 }],
     });
@@ -96,40 +95,47 @@ const BasicInfo = () => {
       data.append("file", image);
       data.append("upload_preset", "event_image");
       data.append("cloud_name", process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME);
-      // data.append("public_id", userId);
-      fetch(
+
+      // Make the image upload request
+      const response = await fetch(
         `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload`,
         {
           method: "POST",
           body: data,
         }
-      )
-        .then((res) => res.json())
-        .then((data) => {
-          setURL(data.url);
-          setImage(data.url);
-          setCountData({
-            name: countName,
-            id: countID,
-            categories: category,
-            desc: countDescription,
-            image: data.url,
-            time: time,
-            date: date,
-            brand_id: brandID,
-            count: [{ name: "dummy", id: "dummy", count: 0 }],
-          });
-        });
-      await uploadData();
+      );
+
+      if (response.ok) {
+        const data = await response.json();
+        const updatedURL = data.url; // Store the updated URL
+        setImage(updatedURL); // Update the image state (if needed)
+        console.log(updatedURL);
+
+        // Now that image upload is complete, you can proceed to upload data
+        uploadData(updatedURL);
+      } else {
+        console.error("Error uploading image");
+      }
     } catch (error) {
       console.error("Error uploading image:", error);
     }
   };
   const router = useRouter();
-  const uploadData = async () => {
+  const uploadData = async (updatedURL) => {
     console.log("uploading data");
-    console.log(countData);
-    await uploadCountData(countData);
+    const updatedCountData = {
+      name: countName,
+      id: countID,
+      categories: category,
+      desc: countDescription,
+      image: updatedURL, // Use the updated URL directly here
+      time: time,
+      date: date,
+      brand_id: brandID.replace(/"/g, ""),
+      count: [{ name: "dummy", id: "dummy", count: 0 }],
+    };
+    console.log(updatedCountData);
+    await uploadCountData(updatedCountData);
     await updateBrandCountdowns();
     const link = `/${brandID.replace(/"/g, "")}/${countID}/edit`;
     // create timeout to wait for data to be uploaded
@@ -212,7 +218,7 @@ const BasicInfo = () => {
         <Button onClick={() => handleImageUpload()} className="w-32 ml-2">
           Next
         </Button>
-        {JSON.stringify(countData)}
+        {/* {JSON.stringify(countData)} */}
       </div>
     </div>
   );

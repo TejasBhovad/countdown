@@ -2,6 +2,9 @@
 
 A full stack web app that would allow Brands(mainly brands) to create counts(countdowns) to upcoming events to create hype as part of their marketing campaign.
 
+> 🚀 Deployed on Vercel :
+> [downcount.vercel.app](https://downcount.vercel.app/)
+
 ## 🌐 Running on Local server
 
 1. `npm i` (when cloned for the first time)

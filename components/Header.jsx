@@ -9,7 +9,7 @@ import Searchbar from "@/components/Searchbar";
 import SignOut from "@/components/SignOut";
 import { useSession } from "next-auth/react";
 
-const Header = () => {
+const Header = ({ setSearchTerm, setSort }) => {
   const { data: session } = useSession();
   const [image, setImage] = useState("/images/discord.png");
   useEffect(() => {
@@ -22,8 +22,8 @@ const Header = () => {
     <div className="py-3 flex w-full h-18 bg-transparent flex justify-between px-3">
       <div className="bg-util flex w-full h-full justify-between py-2 px-4 rounded-md">
         <div className="left flex gap-4 sm:justify-center justify-between">
-          <Searchbar />
-          <Relevance />
+          <Searchbar setSearchTerm={setSearchTerm} />
+          <Relevance setSort={setSort} />
         </div>
         <div className="right sm:block hidden">
           {session?.user ? (
@@ -33,7 +33,7 @@ const Header = () => {
               </Link>
 
               <SignOut />
-              <Link href="/settings" className="text-xl font-semibold">
+              <Link href="/admin" className="text-xl font-semibold">
                 <Image
                   src={image}
                   width={30}

@@ -14,6 +14,7 @@ import HeadingEdit from "@/components/HeadingEdit";
 import { Button } from "@/components/ui/button";
 import { set } from "mongoose";
 import { getEventData } from "@/components/query/CountHandler.jsx";
+import { is } from "date-fns/locale";
 
 const page = ({ params }) => {
   const [isMounted, setIsMounted] = useState(false); // Track component mounting
@@ -59,7 +60,7 @@ const page = ({ params }) => {
   const [inputColor, setInputColor] = useState("#0b090a");
   const [brandIDCheck, setBrandIDCheck] = useState(params.brand_id);
   const [countID, setCountID] = useState(params.count_id);
-  const [headingColor, setHeadingColor] = useState("061826");
+  const [headingColor, setHeadingColor] = useState("#061826");
   const [borderColor, setBorderColor] = useState("#061826");
   const [buttonColor, setButtonColor] = useState("#061826");
   const [heading, setHeading] = useState("Heading");
@@ -120,7 +121,7 @@ const page = ({ params }) => {
     headingColor,
     borderColor,
     buttonColor,
-    heading,
+    heading,isMounted
   ]);
   // Function to calculate time remaining
   const calculateTimeRemaining = () => {

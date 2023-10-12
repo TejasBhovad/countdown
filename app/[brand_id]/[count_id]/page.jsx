@@ -88,8 +88,8 @@ const page = ({ params }) => {
 
   return (
     <div className="w-full h-full flex-col">
-      <Navbar />
-      <div className="w-full h-full pt-12 ">
+      {/* <Navbar /> */}
+      <div className="w-full h-full ">
         <div
           className="w-full h-full flex flex-col justify-center items-center gap-12"
           style={{ backgroundColor: backgroundColor }}

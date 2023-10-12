@@ -69,8 +69,32 @@ const getEventData = async (targetId, brandId) => {
   }
 };
 
+const deleteCount = async (targetId, brandId) => {
+  try {
+    console.log("getting event data");
+
+    const response = await fetch(`/api/counts/delete`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        id: targetId,
+        brand_id: brandId,
+      }),
+    });
+    if (!response.ok) {
+      throw new Error("Something went wrong");
+    }
+    const res = await response.json();
+    return res;
+  } catch (error) {
+    console.error("Failed to fetch event data", error);
+  }
+};
+
 const Count = () => {
   return <div></div>;
 };
-export { uploadCountData, getCountData, getEventData };
+export { uploadCountData, getCountData, getEventData ,deleteCount};
 export default Count;

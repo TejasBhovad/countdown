@@ -26,9 +26,9 @@ const EventFrame = ({
   const [brandImage, setBrandImage] = useState("/images/discord.png");
   let LINK;
   if (edit) {
-    LINK = brandId + "/" + countId + "/edit";
+    LINK = "/"+brandId + "/" + countId + "/edit";
   } else {
-    LINK = brandId + "/" + countId;
+    LINK = "/"+brandId + "/" + countId;
   }
   // size is set to constant to avoid repetition and easy modification
   const IMG_SIZE = 20;

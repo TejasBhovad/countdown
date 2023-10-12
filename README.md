@@ -1,23 +1,16 @@
-# CountDown Full Stack App
+# Downcount
 
 A full stack web app that would allow Brands(mainly brands) to create counts(countdowns) to upcoming events to create hype as part of their marketing campaign.
 
 ## 🌐 Running on Local server
 
-1. `npm i` (when cloned first time)
+1. `npm i` (when cloned for the first time)
 2. `npm run dev`
 3. Site will be live on `http://localhost:3000`
 
-## 🌳 Committing changes
+## 📦 Built with
 
-1. Sync the changes
-2. Do the required changes
-3. Sync again
-4. Commit and push the to Github
-
-## 💡 Tips
-
-- Make sure to keep regular backups by copy pasting the project directory to you local machine
-
-- Update the notion space as and when components are ready
-- README UPDATE: Update the README.md file with the changes you have made to the project
+- [Next.js](https://nextjs.org/)
+- [MongoDB](https://www.mongodb.com/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [Vercel](https://vercel.com/)

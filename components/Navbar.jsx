@@ -26,19 +26,19 @@ const Navbar = () => {
       <div className="title w-1/2 text-left font-semibold">
         <div className="clock  text-right flex items-center justify-end">
           {session?.user ? (
-            <div className="flex items-center gap-5">
-              <Link href="/admin">
-                <span className="font-semibold text-primary">Dashboard</span>
+            <div className="flex items-center gap-5 ">
+              <Link href="/admin" className=" sm:block hidden">
+                <span className="font-semibold text-primary ">Dashboard</span>
               </Link>
 
-              <SignOut />
-              <Link href="/settings" className="text-xl font-semibold">
+              <SignOut className="" />
+              <Link href="/admin" className="text-xl font-semibold">
                 <Image
                   src={image}
                   width={30}
                   height={30}
                   alt="profile picture"
-                  className="object-contain rounded-full"
+                  className="pfp object-contain rounded-full"
                 />
               </Link>
             </div>

@@ -6,7 +6,7 @@ const SignOut = () => {
   return (
     <div className="">
       <Button
-        className="bg-primary h-8 "
+        className="bg-primary h-8"
         onClick={() => {
           signOut({ callbackUrl: "/" });
         }}

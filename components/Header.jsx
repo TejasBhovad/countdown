@@ -22,7 +22,7 @@ const Header = ({ setSearchTerm, setSort }) => {
     <div className="py-3 flex w-full h-18 bg-transparent flex justify-between px-3">
       <div className="bg-util flex w-full h-full justify-between py-2 px-4 rounded-md">
         <div className="left flex gap-4 sm:justify-center justify-between">
-          <Searchbar setSearchTerm={setSearchTerm} />
+          {/* <Searchbar setSearchTerm={setSearchTerm} /> */}
           <Relevance setSort={setSort} />
         </div>
         <div className="right sm:block hidden">
@@ -32,14 +32,14 @@ const Header = ({ setSearchTerm, setSort }) => {
                 <span className="font-semibold">Dashboard</span>
               </Link>
 
-              <SignOut />
+              <SignOut className="" />
               <Link href="/admin" className="text-xl font-semibold">
                 <Image
                   src={image}
                   width={30}
                   height={30}
                   alt="profile picture"
-                  className="object-contain rounded-full"
+                  className="pfp object-contain rounded-full"
                 />
               </Link>
             </div>

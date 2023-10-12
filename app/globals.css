@@ -126,3 +126,6 @@ body {
 .event-grid {
   min-width: 460px;
 }
+.pfp {
+  min-width: 30px;
+}

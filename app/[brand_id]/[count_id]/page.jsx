@@ -7,7 +7,7 @@ import BrandCard from "@/components/BrandCard";
 import Navbar from "@/components/Navbar";
 import { useState, useEffect } from "react";
 import { getEventData } from "@/components/query/CountHandler";
-import { useSession } from "next-auth/react";
+// import { useSession } from "next-auth/react";
 const page = ({ params }) => {
   // State variables for colors
   const [primaryColor, setPrimaryColor] = useState("#061826");
@@ -31,7 +31,7 @@ const page = ({ params }) => {
   const [borderColor, setBorderColor] = useState("#000000");
   const [buttonColor, setButtonColor] = useState("#000000");
   const [heading, setHeading] = useState("");
-  const { data: session } = useSession();
+  // const { data: session } = useSession();
   // Function to calculate time remaining
   const calculateTimeRemaining = () => {
     const timeRemaining = startTime - Date.now();
@@ -64,7 +64,7 @@ const page = ({ params }) => {
   }, []);
 
   useEffect(() => {
-    if (isMounted && session) {
+    if (isMounted) {
       try {
         getEventData(params.count_id, params.brand_id).then((data) => {
           console.log(data);
@@ -84,7 +84,7 @@ const page = ({ params }) => {
         console.log(error);
       }
     }
-  }, [isMounted, session]);
+  }, [isMounted]);
 
   return (
     <div className="w-full h-full flex-col">

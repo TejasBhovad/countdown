@@ -22,7 +22,7 @@ const page = ({ params }) => {
   const fetchHomeData = async () => {
     const data = await getHomeCategoryData(params.type);
     setFilteredData(data);
-    console.log(data);
+    // console.log(data);
   }; 
   useEffect(() => {
     if (isMounted) {

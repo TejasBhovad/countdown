@@ -15,7 +15,7 @@ const BrandCard = ({ brandID, primaryColor, textColor }) => {
         setBrandLogo(data.image);
       });
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   }, [brandID]);
   return (

@@ -2,6 +2,7 @@ import "./globals.css";
 import { Inter } from "next/font/google";
 import Provider from "@/components/Provider";
 const inter = Inter({ subsets: ["latin"] });
+import { Toaster } from "@/components/ui/toaster";
 
 export const metadata = {
   title: "Downcount",
@@ -24,6 +25,7 @@ export default function RootLayout({ children }) {
     <html lang="en" className="w-full h-full">
       <body className={inter.className}>
         <Provider> {children}</Provider>
+        <Toaster />
       </body>
     </html>
   );

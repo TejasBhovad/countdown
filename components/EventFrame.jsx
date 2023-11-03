@@ -37,7 +37,7 @@ const EventFrame = ({
   useEffect(() => {
     try {
       getEventData(countId, brandId).then((data) => {
-        console.log(data);
+        // console.log(data);
         setEventDate(data.date);
         setEventTime(data.time);
         setEventTitle(data.name);
@@ -45,15 +45,15 @@ const EventFrame = ({
       });
       try {
         getBrandData(brandId).then((data) => {
-          console.log(data);
+          // console.log(data);
           setBrandName(data.name);
           setBrandImage(data.image);
         });
       } catch (error) {
-        console.log(error);
+        // console.log(error);
       }
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   }, [brandId, countId]);
   return (

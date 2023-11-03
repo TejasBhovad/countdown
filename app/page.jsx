@@ -26,7 +26,7 @@ const page = () => {
   const fetchHomeData = async () => {
     const data = await getHomeData();
     setHomeData(data);
-    console.log(data);
+    // console.log(data);
   };
   useEffect(() => {
     if (isMounted) {

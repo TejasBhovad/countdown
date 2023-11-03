@@ -32,7 +32,7 @@ const Settings = () => {
   useEffect(() => {
     if (isMounted && session) {
       const email = session.user.email;
-      console.log(email);
+      // console.log(email);
       try {
         getBrandDataEmail(email).then((data) => {
           // console.log(data);
@@ -40,10 +40,10 @@ const Settings = () => {
           setBrandIDInput(JSON.stringify(data.id).replace(/"/g, ""));
           setBrandNameInput(JSON.stringify(data.name).replace(/"/g, ""));
           setBrandEmailInput(JSON.stringify(data.email).replace(/"/g, ""));
-          console.log(JSON.stringify(data.id));
+          // console.log(JSON.stringify(data.id));
         });
       } catch (error) {
-        console.log(email);
+        // console.log(email);
       }
     }
   }, [session, isMounted]);
@@ -87,9 +87,9 @@ const Settings = () => {
       <div className="button flex">
         <Button
           onClick={() => {
-            console.log(brandNameInput);
-            console.log(brandIDInput);
-            console.log(brandEmailInput);
+            // console.log(brandNameInput);
+            // console.log(brandIDInput);
+            // console.log(brandEmailInput);
             saveBrandData();
           }}
           className="w-24 mt-4"

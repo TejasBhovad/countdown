@@ -52,15 +52,15 @@ const BasicInfo = () => {
   useEffect(() => {
     if (isMounted && session) {
       const email = session.user.email;
-      console.log(email);
+      // console.log(email);
       try {
         getBrandDataEmail(email).then((data) => {
           // console.log(data);
           setBrandID(JSON.stringify(data.id));
-          console.log(brandID);
+          // console.log(brandID);
         });
       } catch (error) {
-        console.log(email);
+        // console.log(email);
       }
     }
   }, [session, isMounted]);
@@ -109,7 +109,7 @@ const BasicInfo = () => {
         const data = await response.json();
         const updatedURL = data.url; // Store the updated URL
         setImage(updatedURL); // Update the image state (if needed)
-        console.log(updatedURL);
+        // console.log(updatedURL);
 
         // Now that image upload is complete, you can proceed to upload data
         uploadData(updatedURL);
@@ -122,7 +122,7 @@ const BasicInfo = () => {
   };
   const router = useRouter();
   const uploadData = async (updatedURL) => {
-    console.log("uploading data");
+    // console.log("uploading data");
     const updatedCountData = {
       name: countName,
       id: countID,
@@ -134,7 +134,7 @@ const BasicInfo = () => {
       brand_id: brandID.replace(/"/g, ""),
       count: [{ name: "dummy", id: "dummy", count: 0 }],
     };
-    console.log(updatedCountData);
+    // console.log(updatedCountData);
     await uploadCountData(updatedCountData);
     await updateBrandCountdowns();
     const link = `/${brandID.replace(/"/g, "")}/${countID}/edit`;
@@ -149,7 +149,7 @@ const BasicInfo = () => {
     const brandData = await getBrandDataEmail(session.user.email);
     const brandCountdowns = brandData.countdowns;
     brandCountdowns.push(countID);
-    console.log(brandCountdowns);
+    // console.log(brandCountdowns);
 
     // update brand's countdowns array
     await uploadBrandData({

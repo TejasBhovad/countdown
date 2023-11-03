@@ -28,23 +28,23 @@ const Counts = () => {
   useEffect(() => {
     if (isMounted && session) {
       const email = session.user.email;
-      console.log(email);
+      // console.log(email);
       try {
         getBrandDataEmail(email).then((data) => {
           setBrandID(JSON.stringify(data.id));
           setCounts(data.countdowns);
-          console.log(JSON.stringify(data.id));
+          // console.log(JSON.stringify(data.id));
         });
       } catch (error) {
-        console.log(email);
+        // console.log(email);
       }
     }
   }, [session, isMounted]);
 
   const deleteCountHandler = async (count_id, brand_id) => {
-    console.log("delete count");
-    console.log(count_id);
-    console.log(brand_id);
+    // console.log("delete count");
+    // console.log(count_id);
+    // console.log(brand_id);
     await deleteCount(count_id, brand_id);
     setCounts((prevCounts) => prevCounts.filter((count) => count !== count_id));
     await updateBrandCountdowns(count_id, brand_id);
@@ -56,7 +56,7 @@ const Counts = () => {
     const brandCountdowns = brandData.countdowns;
     // brandCountdowns.push(countID);
     brandCountdowns.splice(brandCountdowns.indexOf(count_id), 1);
-    console.log(brandCountdowns);
+    // console.log(brandCountdowns);
 
     // update brand's countdowns array
     await uploadBrandData({

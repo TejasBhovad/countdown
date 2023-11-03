@@ -15,7 +15,7 @@ import { Button } from "@/components/ui/button";
 import { set } from "mongoose";
 import { getEventData } from "@/components/query/CountHandler.jsx";
 import { is } from "date-fns/locale";
-
+import { useToast } from "@/components/ui/use-toast";
 const page = ({ params }) => {
   const [isMounted, setIsMounted] = useState(false); // Track component mounting
   const [brandID, setBrandID] = useState("brand-id");
@@ -25,19 +25,18 @@ const page = ({ params }) => {
       setIsMounted(false); // Component is unmounted
     };
   }, []);
-
   const { data: session } = useSession();
   useEffect(() => {
     if (isMounted && session) {
       const email = session.user.email;
-      console.log(email);
+      // console.log(email);
       try {
         getBrandDataEmail(email).then((data) => {
           setBrandID(JSON.stringify(data.id));
-          console.log(JSON.stringify(data.id));
+          // console.log(JSON.stringify(data.id));
         });
       } catch (error) {
-        console.log(email);
+        // console.log(email);
       }
     }
   }, [session, isMounted]);
@@ -121,7 +120,8 @@ const page = ({ params }) => {
     headingColor,
     borderColor,
     buttonColor,
-    heading,isMounted
+    heading,
+    isMounted,
   ]);
   // Function to calculate time remaining
   const calculateTimeRemaining = () => {
@@ -164,7 +164,7 @@ const page = ({ params }) => {
       console.log(error);
     }
   }, [isMounted]);
-
+  const { toast } = useToast();
   return (
     <div className="w-full h-full flex-col">
       <Navbar />
@@ -225,6 +225,10 @@ const page = ({ params }) => {
                 className="px-8 py-2"
                 onClick={() => {
                   // console.log(countData);
+                  toast({
+                    title: "Saved Countdown",
+                    description: "changes will be reflected soon",
+                  });
                   uploadCountData(countData);
                 }}
               >

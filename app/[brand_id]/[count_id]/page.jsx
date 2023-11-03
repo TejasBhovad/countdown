@@ -7,8 +7,11 @@ import BrandCard from "@/components/BrandCard";
 import Navbar from "@/components/Navbar";
 import { useState, useEffect } from "react";
 import { getEventData } from "@/components/query/CountHandler";
+import { useToast } from "@/components/ui/use-toast";
+
 // import { useSession } from "next-auth/react";
 const page = ({ params }) => {
+  // const toast = useToast();
   // State variables for colors
   const [primaryColor, setPrimaryColor] = useState("#061826");
   const [secondaryColor, setSecondaryColor] = useState("#2C4053");
@@ -67,7 +70,7 @@ const page = ({ params }) => {
     if (isMounted) {
       try {
         getEventData(params.count_id, params.brand_id).then((data) => {
-          console.log(data);
+          // console.log(data);
           // set colors andtext from data
           setPrimaryColor(data.count[0].primaryColor);
           setSecondaryColor(data.count[0].secondaryColor);
@@ -81,7 +84,7 @@ const page = ({ params }) => {
           setStartTime(new Date(data.date));
         });
       } catch (error) {
-        console.log(error);
+        // console.log(error);
       }
     }
   }, [isMounted]);
